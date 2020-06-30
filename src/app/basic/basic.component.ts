@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GmailService } from '../gmail.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { GmailService } from '../gmail.service';
   templateUrl: './basic.component.html',
   styleUrls: ['./basic.component.scss']
 })
-export class BasicComponent {
+export class BasicComponent implements OnInit {
   result = '';
   topic: string;
   message: string;
@@ -32,4 +32,16 @@ export class BasicComponent {
       .then(res => this.logJSON('Reset Autoresponder', res));
   }
 
+  getAutoresponder() {
+    this.gmail.addon.getAutoresponder()
+      .then(
+        res => this.logJSON('Get Autoresponder', res),
+        err => this.logJSON('Error while getAutoresponder', err)
+      );
+  }
+
+  ngOnInit() {
+    this.log('Initial get');
+    this.getAutoresponder();
+  }
 }

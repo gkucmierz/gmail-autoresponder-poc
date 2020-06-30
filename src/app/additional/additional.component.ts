@@ -36,21 +36,30 @@ export class AdditionalComponent implements OnInit, OnDestroy {
 
   setAutoresponder() {
     this.gmail.addon.setAutoresponder('HTML Message', 'Topic')
-      .then(res => this.logJSON('Set Autoresponder', res));
+      .then(
+        res => this.logJSON('Set Autoresponder', res),
+        err => this.logJSON('Error while setAutoresponder', err)
+      );
   }
 
   resetAutoresponder() {
     this.gmail.addon.resetAutoresponder()
-      .then(res => this.logJSON('Reset Autoresponder', res));
+      .then(
+        res => this.logJSON('Reset Autoresponder', res),
+        err => this.logJSON('Error while resetAutoresponder', err)
+      );
   }
 
   getAutoresponder() {
     this.gmail.addon.getAutoresponder()
-      .then(res => this.logJSON('Get Autoresponder', res));
+      .then(
+        res => this.logJSON('Get Autoresponder', res),
+        err => this.logJSON('Error while getAutoresponder', err)
+      );
   }
 
-  isSignedin() {
-    this.log(`is signed in: ${this.gmail.addon.isSignedIn()}`);
+  isSignedinSync() {
+    this.log(`is signed in: ${this.gmail.addon.isSignedInSync()}`);
   }
 
   ngOnInit() {
